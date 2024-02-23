@@ -1,0 +1,107 @@
+﻿<Window x:Class="AutoPlac.Forms.FrmVozilo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoPlac.Forms"
+        mc:Ignorable="d"
+        Title="Dodaj/Izmeni vozilo" Height="480" Width="350" Background="#252A34" >
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF2E63"/>
+            <Setter Property="Foreground" Value="#F7FBFC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FF2E63"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0,3,5,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F7FBFC"/>
+                                <Setter Property="Foreground" Value="#FF2E63"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+        <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#F7FBFC"/>
+            <Setter Property="Foreground" Value="#252A34"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border 
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Highlight a ComboBoxItem as the mouse passes over -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#ff9cb5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}"/>
+            <Setter Property="Background" Value="#F7FBFC"/>
+            <Setter Property="Foreground" Value="#252A34"/>
+            <Setter Property="BorderBrush" Value="#FF2E63"/>
+        </Style>
+        <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Background" Value="#F7FBFC"/>
+            <Setter Property="Foreground" Value="#252A34"/>
+
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Label Content="Broj sasije:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,46,0,0"/>
+        <Label Content="Godina proizvodnje:" Foreground="#F7FBFC"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,86,0,0"/>
+        <Label Content="Predjeno KM:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,128,0,0"/>
+        <Label Content="Model:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,197,0,0"/>
+        <Label Content="Kategorija:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,230,0,0"/>
+        <Label Content="Boja:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,270,0,0"/>
+        <Label Content="Gorivo:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,309,0,0"/>
+        <Label Content="Cena:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,343,0,0"/>
+        <Label Content="Proizvodjac:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,165,0,0"/>
+        <TextBox x:Name="txtBrojSasije" VerticalAlignment="Top" Margin="161,50,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="120"/>
+        <TextBox x:Name="txtGodinaProizvodnje" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="161,92,0,0" TextWrapping="Wrap"/>
+        <TextBox x:Name="txtPredjenoKM" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="161,132,0,0" TextWrapping="Wrap"/>
+        <TextBox x:Name="txtCena" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="161,351,0,0" TextWrapping="Wrap"/>
+        <ComboBox x:Name="cbProizvodjac" Style="{StaticResource ComboBoxStyle}" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="161,166,0,0" DisplayMemberPath="Naziv" SelectedValuePath="ProizvodjacID" SelectionChanged="cbProizvodjac_SelectionChanged"/>
+        <ComboBox x:Name="cbModel" Width="120" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Margin="161,199,0,0" DisplayMemberPath="Naziv" SelectedValuePath="ModelID"/>
+        <ComboBox x:Name="cbKategorija" Width="120" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Margin="161,232,0,0" DisplayMemberPath="Naziv" SelectedValuePath="KategorijaID" />
+        <ComboBox x:Name="cbBoja" Width="120" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Margin="161,274,0,0" DisplayMemberPath="Naziv" SelectedValuePath="BojaID"/>
+        <ComboBox x:Name="cbGorivo" Width="120" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Margin="161,313,0,0" DisplayMemberPath="Naziv" SelectedValuePath="GorivoID"/>
+        <Label Content="Prodato:" Foreground="#F7FBFC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,374,0,0"/>
+        <CheckBox x:Name="chbProdato" HorizontalAlignment="Left" Margin="213,379,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnAdd" Style="{StaticResource ButtonStyle}" Content="Add" Width="80" Height="20" HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom" Margin="26,0,0,10" Click="btnAdd_Click"/>
+        <Button x:Name="btnCancel" Style="{StaticResource ButtonStyle}" Content="Cancel" Width="80" Height="20" HorizontalAlignment="Left"
+                VerticalAlignment="Bottom" Margin="135,0,0,10" Click="btnCancel_Click"/>
+    </Grid>
+</Window>
